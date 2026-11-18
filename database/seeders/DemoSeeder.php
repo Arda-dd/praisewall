@@ -86,5 +86,49 @@ class DemoSeeder extends Seeder
             'source' => TestimonialSource::Form,
             'created_at' => now()->subDays(4),
         ]);
+
+        $this->turkishWall();
+    }
+
+    /**
+     * A second wall in Turkish, to show the languages and another style.
+     */
+    private function turkishWall(): void
+    {
+        $wall = Wall::query()->updateOrCreate(['slug' => 'atolye-kahve'], [
+            'name' => 'Atölye Kahve',
+            'headline' => 'Atölye Kahve deneyiminizi anlatır mısınız?',
+            'prompt' => 'En çok neyi sevdiniz? Bir iki cümle yeterli.',
+            'accent_color' => '#b45309',
+            'thank_you_message' => 'Teşekkür ederiz! Yorumunuz incelendikten sonra yayınlanacak.',
+            'collecting' => true,
+            'ask_for_rating' => true,
+            'ask_for_avatar' => true,
+            'style' => 'elegant',
+            'locale' => 'tr',
+        ]);
+
+        $wall->testimonials()->delete();
+
+        $reviews = [
+            ['Zeynep Arslan', 'Grafik tasarımcı', 5, true, 'Sabahları çalışmak için en sevdiğim yer. Kahve her seferinde aynı kalitede, ortam sakin ve internet hiç kesilmiyor.'],
+            ['Can Yıldız', 'Yazılım geliştirici', 5, false, 'Filtre kahveleri gerçekten özenle hazırlanıyor. Baristalar hangi çekirdeği neden seçtiklerini anlatmaktan keyif alıyor.'],
+            ['Ayşe Demir', 'Öğretmen', 4, false, 'Hafta sonu kahvaltısı harika, sadece biraz kalabalık oluyor. Erken gitmenizi öneririm.'],
+            ['Mert Kaya', 'Fotoğrafçı', 5, false, 'Işığı çok güzel, çekimlerim için sık sık buraya geliyorum. Cheesecake de kahve kadar iyi.'],
+        ];
+
+        foreach ($reviews as $i => [$name, $title, $rating, $featured, $body]) {
+            $wall->testimonials()->create([
+                'author_name' => $name,
+                'author_title' => $title,
+                'rating' => $rating,
+                'body' => $body,
+                'featured' => $featured,
+                'status' => TestimonialStatus::Approved,
+                'source' => TestimonialSource::Form,
+                'approved_at' => now()->subDays($i * 4 + 1),
+                'created_at' => now()->subDays($i * 4 + 2),
+            ]);
+        }
     }
 }

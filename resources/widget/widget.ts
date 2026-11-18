@@ -1,5 +1,5 @@
-import { render } from './render';
 import { readOptions } from './options';
+import { render } from './render';
 import styles from './styles.css?inline';
 import type { Feed } from './types';
 
@@ -21,16 +21,20 @@ export async function mount(element: HTMLElement, feed?: Feed): Promise<void> {
 
   const options = readOptions(element);
   const shadow = element.shadowRoot ?? element.attachShadow({ mode: 'open' });
-  element.setAttribute('data-theme', options.theme);
+  element.setAttribute('data-pw-theme', options.theme);
+  element.setAttribute('data-pw-radius', options.radius);
+  element.toggleAttribute('data-pw-inherit-font', options.inheritFont);
 
   const style = document.createElement('style');
   style.textContent = styles;
   const skeleton = document.createElement('div');
   skeleton.className = 'skeleton';
-  shadow.replaceChildren(style, skeleton);
+  const floating = options.layout === 'popup' || options.layout === 'badge';
+  shadow.replaceChildren(style, ...(floating ? [] : [skeleton]));
 
   try {
     const data = feed ?? (await loadFeed(element.dataset.praisewall ?? ''));
+    element.setAttribute('data-pw-style', options.style ?? data.style ?? 'classic');
     shadow.replaceChildren(style, render(data, options));
   } catch (error) {
     shadow.replaceChildren();

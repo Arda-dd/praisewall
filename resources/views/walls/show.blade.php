@@ -14,7 +14,10 @@
                 </a>
             @endforeach
         </div>
-        <button type="button" class="btn-secondary" data-toggle="#add-testimonial">+ Add manually</button>
+        <div class="flex gap-2">
+            <a href="{{ route('walls.export', $wall) }}" class="btn-secondary">Export CSV</a>
+            <button type="button" class="btn-secondary" data-toggle="#add-testimonial">+ Add manually</button>
+        </div>
     </div>
 
     <div id="add-testimonial" @class(['mb-8', 'hidden' => ! $errors->any()])>

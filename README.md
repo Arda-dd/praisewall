@@ -16,7 +16,7 @@ A free, self-hosted alternative to paid testimonial tools. Your customers' words
 <p align="center">
   <a href="https://github.com/Arda-dd/praisewall/actions/workflows/ci.yml"><img src="https://github.com/Arda-dd/praisewall/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/widget-4%20KB%20gzipped-6d28d9" alt="Widget size: 4 KB gzipped">
+  <img src="https://img.shields.io/badge/widget-7%20KB%20gzipped-6d28d9" alt="Widget size: 7 KB gzipped">
 </p>
 
 <p align="center"><img src="docs/wall.png" width="820" alt="A wall of testimonials with star ratings, names and job titles, in three columns"></p>
@@ -38,17 +38,29 @@ Praisewall does the whole loop for you:
 
 ## Features
 
+**Show them off**
+- **Seven layouts**: masonry wall, grid, auto-scrolling carousel, slider with arrows, list, a popup that cycles through testimonials in the corner of your page, and a compact "★ 4.8 · 23 reviews" badge.
+- **Six styles**: Classic, Minimal, Bubble, Glass, Bold and Elegant. Light, dark or automatic theme, your accent color, four corner shapes, your site's own font.
+- **Widget designer**: pick everything with a live preview on light, dark or colorful backgrounds, then copy the code.
+- **Share as image**: turn any testimonial into a PNG for LinkedIn, Instagram or X. Six templates, three sizes, made in your browser.
+- **One-line embed** that renders in a shadow root, so your site's CSS can't break it and it can't break yours. About 7 KB gzipped, no dependencies, no cookies, no tracking.
+- **Public wall page** to link from your site, a profile or an email signature, and a **JSON API** for your own design.
+
+**Collect and manage them**
 - **Moderation inbox** with pending, approved and rejected tabs. Pin favourites to the top.
-- **Three layouts**: a masonry wall, an auto-scrolling carousel and a simple list. Light, dark or automatic theme.
-- **One-line embed** that renders in a shadow root, so your site's CSS can't break it and it can't break yours. About 4 KB gzipped, no dependencies, no cookies, no tracking.
-- **Public wall page** to link from your site, a profile or an email signature.
-- **JSON API** if you want to build your own design.
+- **Five languages** for the form, the wall and the widget: English, Turkish, German, Spanish and French.
+- **Email alerts** when someone leaves a testimonial, and **CSV export** of everything.
 - **Ratings and photos**, both optional. People without a photo get colored initials.
 - **Add testimonials by hand** from emails, review sites or LinkedIn posts.
-- **Many walls**, one per product, service or client, each with its own color and logo.
+- **Many walls**, one per product, service or client, each with its own color, logo, style and language.
+
+**Built carefully**
 - **Spam protection** with rate limiting, a honeypot field and a required consent checkbox.
 - **Private emails**: the email field is for you only and never reaches the API or the widget.
+- **Safe by default**: testimonial text is never rendered as HTML, links must be http(s), and CSV exports defuse spreadsheet formulas.
 - **Accessible**: keyboard friendly, screen reader labels, respects reduced motion.
+
+<p align="center"><img src="docs/styles.png" width="820" alt="The same testimonial in the six styles: Classic, Minimal, Bubble, Glass, Bold and Elegant"></p>
 
 ## Quick start
 
@@ -79,7 +91,7 @@ Database changes are applied automatically when the container starts.
 
 ## Embed it on your site
 
-Open a wall and go to the **Embed** tab. Pick a layout and theme, then copy the code. It looks like this:
+Open a wall and go to the **Embed** tab. It's a small designer: pick a layout, style and colors, see the result live, then copy the code. It looks like this:
 
 ```html
 <div data-praisewall="https://testimonials.example.com/api/walls/orbit" data-layout="masonry"></div>
@@ -88,17 +100,28 @@ Open a wall and go to the **Embed** tab. Pick a layout and theme, then copy the 
 
 Paste it where the testimonials should appear. It works in plain HTML, WordPress (Custom HTML block), Webflow (Embed element), Laravel Blade, React and anything else that renders HTML.
 
-<p align="center"><img src="docs/embed.png" width="820" alt="The embed tab with layout and theme options, the generated code and a live preview"></p>
+<p align="center"><img src="docs/embed.png" width="820" alt="The widget designer with layout and style options, the generated code and a live preview in the Glass style on a colorful background"></p>
 
 **Options**, all optional:
 
 | Attribute | Values | Default |
 | --- | --- | --- |
-| `data-layout` | `masonry`, `carousel`, `list` | `masonry` |
+| `data-layout` | `masonry`, `grid`, `carousel`, `slider`, `list`, `popup`, `badge` | `masonry` |
+| `data-style` | `classic`, `minimal`, `bubble`, `glass`, `bold`, `elegant` | the wall's style |
 | `data-theme` | `light`, `dark`, `auto` (follows the visitor's setting) | `auto` |
+| `data-accent` | A hex color like `#0ea5e9` | the wall's color |
+| `data-radius` | `none`, `small`, `medium`, `large` | `medium` |
+| `data-font` | `inherit` uses your site's font | system font |
+| `data-columns` | Maximum columns for `masonry` and `grid`, 1 to 6 | automatic |
 | `data-limit` | Show at most this many testimonials | all |
+| `data-hide` | Comma-separated: `rating`, `avatar`, `title`, `quote` | nothing |
+| `data-date` | `true` shows when each testimonial was approved | `false` |
+| `data-position` | `bottom-left` or `bottom-right`, for `popup` | `bottom-left` |
+| `data-interval` | Seconds per testimonial in `slider` and `popup` | `6` |
 | `data-cta` | `false` hides the "Leave a testimonial" button | `true` |
-| `data-branding` | `false` hides the "Powered by Praisewall" link | `true` |
+| `data-branding` | `false` hides the Praisewall link | `true` |
+
+Visitors can close the popup, and it stays closed for the rest of their visit. The slider and popup pause on hover and don't move at all for visitors who prefer reduced motion.
 
 You can put several widgets on one page. If you add one after the page has loaded, call `Praisewall.mountAll()`.
 
@@ -126,7 +149,28 @@ You can put several widgets on one page. If you add one after the page has loade
 }
 ```
 
-It allows requests from any origin and is cached for a minute.
+It also has `style`, `locale`, the widget's texts in the wall's language (`labels`) and a `summary` with the count and average rating. It allows requests from any origin and is cached for a minute.
+
+## Share testimonials as images
+
+Every testimonial has a **Share as image** button. Pick one of six templates and a size (square, LinkedIn landscape or story), choose whether to show the stars, photo and your logo, and download a PNG. The image is drawn in your browser; nothing is uploaded anywhere.
+
+<p align="center"><img src="docs/share.png" width="420" alt="A testimonial as a square image: a white card with stars, the quote and the author on a purple to pink gradient"></p>
+
+## Email alerts
+
+Praisewall emails the admin when a new testimonial arrives (you can turn this off per wall). Set up mail in `.env` with your provider's SMTP details:
+
+```ini
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.example.com
+MAIL_PORT=587
+MAIL_USERNAME=you@example.com
+MAIL_PASSWORD=your-password
+MAIL_FROM_ADDRESS=testimonials@example.com
+```
+
+With Docker, put them in the same `.env` file as `APP_KEY` and run `docker compose up -d` again. If mail isn't set up, nothing breaks: the testimonial is still saved.
 
 ## Install without Docker
 
@@ -163,7 +207,7 @@ php artisan db:seed --class=DemoSeeder
 php artisan serve
 ```
 
-Log in at http://127.0.0.1:8000 with `demo@example.com` / `password`. The people and companies in the sample data are made up.
+Log in at http://127.0.0.1:8000 with `demo@example.com` / `password`. There are two walls: Orbit in English and Atölye Kahve in Turkish. The people and companies in the sample data are made up.
 
 ## FAQ
 
@@ -183,7 +227,10 @@ Not onto your website. Every testimonial from the form waits for your approval. 
 Yes, untick it on the Embed tab or add `data-branding="false"`. Keeping it is a nice way to say thanks.
 
 **Does the widget slow down my site?**
-It's about 4 KB gzipped, loads with `async`, and makes one small request.
+It's about 7 KB gzipped, loads with `async`, and makes one small request.
+
+**Can I add another language?**
+Yes. Copy `lang/en/praisewall.php` to `lang/xx/praisewall.php`, translate it, and add the language to `config/praisewall.php`. A pull request would be very welcome.
 
 **Video testimonials?**
 Not yet. Contributions are welcome.

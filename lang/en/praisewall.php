@@ -1,0 +1,50 @@
+<?php
+
+return [
+    'rating' => 'Your rating',
+    'stars' => ':count star|:count stars',
+    'body' => 'Your testimonial',
+    'body_placeholder' => 'A sentence or two is perfect.',
+    'name' => 'Your name',
+    'title' => 'Title and company',
+    'title_placeholder' => 'Founder at Acme',
+    'optional' => 'Optional',
+    'email' => 'Email',
+    'email_hint' => 'Optional. Only :name sees it, in case they want to thank you.',
+    'photo' => 'Your photo',
+    'photo_hint' => 'Optional. Testimonials with a face are trusted more.',
+    'choose_file' => 'Choose a photo',
+    'consent' => 'I agree that :name may show my testimonial, name, title and photo on their website.',
+    'submit' => 'Send testimonial',
+    'closed' => ":name isn't collecting testimonials right now.",
+    'see_others' => 'See what others said',
+    'thanks' => 'Thank you!',
+    'powered_by' => 'Powered by Praisewall',
+    'wall_kicker' => 'Wall of love',
+    'wall_title' => 'What people say about :name',
+    'wall_description' => ':count testimonial about :name.|:count testimonials about :name.',
+
+    'validation' => [
+        'required' => 'Please fill this in.',
+        'rating' => 'Please choose a rating.',
+        'body_min' => 'Please write a little more, at least a sentence.',
+        'too_long' => 'This is a bit too long.',
+        'email' => 'This doesn\'t look like an email address.',
+        'image' => 'Please choose a PNG, JPG or WebP image up to 2 MB.',
+        'consent' => 'Please confirm that we may show your testimonial.',
+    ],
+
+    // Sent to the widget with the feed.
+    'widget' => [
+        'read_more' => 'Read more',
+        'show_less' => 'Show less',
+        'leave' => 'Leave a testimonial',
+        'empty' => 'No testimonials yet.',
+        'stars' => ':rating out of 5 stars',
+        'reviews' => ':count review|:count reviews',
+        'previous' => 'Previous',
+        'next' => 'Next',
+        'close' => 'Close',
+        'about' => 'What people say about :name',
+    ],
+];

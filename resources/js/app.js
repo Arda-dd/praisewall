@@ -84,32 +84,86 @@ const embed = document.querySelector('[data-embed]');
 if (embed) {
     const snippet = document.getElementById('snippet');
     const preview = embed.querySelector('[data-preview]');
-    const value = (name) => embed.querySelector(`[name="${name}"]:checked`)?.value ?? embed.querySelector(`[name="${name}"]`)?.value;
-    const checked = (name) => embed.querySelector(`[name="${name}"]`).checked;
+    const field = (name) => embed.querySelector(`[name="${name}"]`);
+    const value = (name) => embed.querySelector(`[name="${name}"]:checked`)?.value ?? field(name)?.value ?? '';
+    const checked = (name) => field(name).checked;
 
+    // Only what differs from the widget's defaults goes into the snippet.
     const attributes = () => {
-        const attrs = { 'data-praisewall': embed.dataset.feed, 'data-layout': value('layout'), 'data-theme': value('theme') };
+        const layout = value('layout');
+        const hidden = [...embed.querySelectorAll('[name="show"]')].filter((box) => !box.checked).map((box) => box.value);
+        const attrs = { 'data-praisewall': embed.dataset.feed, 'data-layout': layout };
+
+        if (value('style') !== embed.dataset.wallStyle) attrs['data-style'] = value('style');
+        if (value('theme') !== 'auto') attrs['data-theme'] = value('theme');
+        if (value('radius') !== 'medium') attrs['data-radius'] = value('radius');
+        if (value('accent').toLowerCase() !== embed.dataset.wallAccent.toLowerCase()) attrs['data-accent'] = value('accent');
+        if (value('columns') && ['masonry', 'grid'].includes(layout)) attrs['data-columns'] = value('columns');
+        if (layout === 'popup' && value('position') !== 'bottom-left') attrs['data-position'] = value('position');
         if (value('limit')) attrs['data-limit'] = value('limit');
+        if (hidden.length) attrs['data-hide'] = hidden.join(',');
+        if (checked('date')) attrs['data-date'] = 'true';
+        if (checked('font')) attrs['data-font'] = 'inherit';
         if (!checked('cta')) attrs['data-cta'] = 'false';
         if (!checked('branding')) attrs['data-branding'] = 'false';
         return attrs;
     };
 
     const update = () => {
+        const layout = value('layout');
+        embed.querySelectorAll('[data-only]').forEach((element) => {
+            element.hidden = !element.dataset.only.split(' ').includes(layout);
+        });
+
         const attrs = attributes();
         const html = Object.entries(attrs)
             .map(([name, val]) => `${name}="${val}"`)
             .join(' ');
-        snippet.textContent = `<div ${html}></div>\n<script src="${embed.dataset.widget}" async></script>`;
+        snippet.textContent = `<div ${html}></div>
+<script src="${embed.dataset.widget}" async></script>`;
 
         // A fresh element each time, since the widget mounts an element once.
         const target = document.createElement('div');
         Object.entries(attrs).forEach(([name, val]) => target.setAttribute(name, val));
+        try {
+            sessionStorage.removeItem(`praisewall:closed:${embed.dataset.wallName}`);
+        } catch {
+            // Storage can be blocked; the preview popup then stays closed once dismissed.
+        }
         preview.replaceChildren(target);
         window.Praisewall?.mount(target);
     };
 
+    embed.querySelectorAll('[data-preview-bg]').forEach((button) =>
+        button.addEventListener('click', () => {
+            preview.style.background = button.dataset.previewBg;
+            embed.querySelectorAll('[data-preview-bg]').forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+        }),
+    );
+
     embed.addEventListener('change', update);
+    embed.addEventListener('input', (event) => event.target.type === 'color' && update());
     if (window.Praisewall) update();
     else window.addEventListener('load', update);
 }
+
+// File inputs on the collection form: show the chosen photo.
+document.querySelectorAll('[data-file]').forEach((label) => {
+    const input = label.querySelector('input[type="file"]');
+    const preview = label.querySelector('[data-file-preview]');
+    const name = label.querySelector('[data-file-label]');
+    input.addEventListener('change', () => {
+        const file = input.files?.[0];
+        if (!file) return;
+        name.textContent = file.name;
+        const image = document.createElement('img');
+        image.src = URL.createObjectURL(file);
+        image.alt = '';
+        image.className = 'size-full object-cover';
+        preview.replaceChildren(image);
+    });
+});
+
+const shareImage = document.querySelector('[data-share-image]');
+if (shareImage) import('./share-image.js').then(({ init }) => init(shareImage));
+

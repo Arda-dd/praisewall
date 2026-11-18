@@ -36,6 +36,9 @@ class WallController extends Controller
             'collecting' => true,
             'ask_for_rating' => true,
             'ask_for_avatar' => true,
+            'style' => 'classic',
+            'locale' => 'en',
+            'notify' => true,
         ])]);
     }
 

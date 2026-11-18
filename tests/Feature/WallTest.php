@@ -35,6 +35,9 @@ class WallTest extends TestCase
             'collecting' => '1',
             'ask_for_rating' => '1',
             'ask_for_avatar' => '0',
+            'notify' => '1',
+            'style' => 'glass',
+            'locale' => 'tr',
             ...$overrides,
         ];
     }
@@ -47,14 +50,20 @@ class WallTest extends TestCase
         $this->assertSame('orbit-analytics', $wall->slug);
         $this->assertTrue($wall->collecting);
         $this->assertFalse($wall->ask_for_avatar);
+        $this->assertSame('glass', $wall->style);
+        $this->assertSame('tr', $wall->locale);
     }
 
-    public function test_links_are_unique_and_colors_are_hex(): void
+    public function test_settings_are_validated(): void
     {
         Wall::factory()->create(['slug' => 'orbit']);
 
-        $this->post(route('walls.store'), $this->settings(['slug' => 'orbit', 'accent_color' => 'red']))
-            ->assertSessionHasErrors(['slug', 'accent_color']);
+        $this->post(route('walls.store'), $this->settings([
+            'slug' => 'orbit',
+            'accent_color' => 'red',
+            'style' => 'neon',
+            'locale' => 'xx',
+        ]))->assertSessionHasErrors(['slug', 'accent_color', 'style', 'locale']);
     }
 
     public function test_the_index_shows_counts(): void
@@ -103,13 +112,15 @@ class WallTest extends TestCase
         Storage::disk('public')->assertMissing($avatar);
     }
 
-    public function test_the_embed_page_has_the_feed_url(): void
+    public function test_the_widget_designer_has_the_feed_url_and_every_option(): void
     {
-        $wall = Wall::factory()->create();
+        $wall = Wall::factory()->create(['style' => 'bubble']);
 
         $this->get(route('walls.embed', $wall))
             ->assertOk()
             ->assertSee($wall->apiUrl())
-            ->assertSee('widget.js');
+            ->assertSee('widget.js')
+            ->assertSee('data-wall-style="bubble"', false)
+            ->assertSee(['Slider', 'Popup', 'Badge', 'Glass', 'Elegant']);
     }
 }

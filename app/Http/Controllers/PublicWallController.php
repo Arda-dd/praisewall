@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wall;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
 
 /**
@@ -12,6 +13,7 @@ class PublicWallController extends Controller
 {
     public function __invoke(Wall $wall): View
     {
+        App::setLocale($wall->locale);
         $wall->load('published');
 
         return view('wall.show', [

@@ -66,9 +66,13 @@
     .seg button { all: unset; cursor: pointer; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--muted); }
     .seg button[aria-pressed="true"] { background: var(--panel); color: var(--fg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
     .seg button:focus-visible { outline: 2px solid var(--accent); }
-    .stage { padding: 28px 22px; transition: background 0.2s; }
+    .toolbar.styles { padding-top: 0; }
+    .seg { flex-wrap: wrap; }
+    .stage { position: relative; min-height: 380px; padding: 28px 22px; transition: background 0.2s; transform: translateZ(0); }
     .stage.dark { background: #0a0a0b; }
     .stage.light { background: #fafafa; }
+    .stage.vivid { background: radial-gradient(at 15% 20%, #a78bfa, transparent 55%), radial-gradient(at 85% 25%, #f9a8d4, transparent 55%), radial-gradient(at 50% 95%, #67e8f9, transparent 55%), #312e81; }
+    .stage.center { display: grid; place-items: center; }
     pre { margin: 0; padding: 18px 20px; border-radius: 14px; background: var(--code); color: #e4e4e7; font: 13.5px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-x: auto; }
     pre .c { color: #8b8b95; }
     pre .t { color: #c4b5fd; }
@@ -118,26 +122,41 @@
         <a class="btn secondary" href="https://github.com/Arda-dd/praisewall#quick-start">Install in 2 minutes</a>
       </div>
       <div class="facts">
-        <span>4 KB widget</span>
+        <span>7 KB widget</span>
         <span>No tracking, no cookies</span>
         <span>Works on any site</span>
+        <span>5 languages</span>
         <span>Laravel + TypeScript</span>
       </div>
     </header>
 
     <section id="demo">
       <h2>This is the real widget</h2>
-      <p class="sub">The same embed your visitors would see. Switch the layout and theme.</p>
+      <p class="sub">Six layouts, six styles, light and dark. Try them: this is the same embed your visitors would see.</p>
       <div class="demo">
         <div class="toolbar">
           <div class="seg" role="group" aria-label="Layout" data-group="layout">
             <button type="button" data-value="masonry" aria-pressed="true">Wall</button>
+            <button type="button" data-value="grid" aria-pressed="false">Grid</button>
             <button type="button" data-value="carousel" aria-pressed="false">Carousel</button>
-            <button type="button" data-value="list" aria-pressed="false">List</button>
+            <button type="button" data-value="slider" aria-pressed="false">Slider</button>
+            <button type="button" data-value="popup" aria-pressed="false">Popup</button>
+            <button type="button" data-value="badge" aria-pressed="false">Badge</button>
           </div>
-          <div class="seg" role="group" aria-label="Theme" data-group="theme">
+          <div class="seg" role="group" aria-label="Background" data-group="theme">
             <button type="button" data-value="light" aria-pressed="true">Light</button>
             <button type="button" data-value="dark" aria-pressed="false">Dark</button>
+            <button type="button" data-value="vivid" aria-pressed="false">Vivid</button>
+          </div>
+        </div>
+        <div class="toolbar styles">
+          <div class="seg" role="group" aria-label="Style" data-group="style">
+            <button type="button" data-value="classic" aria-pressed="true">Classic</button>
+            <button type="button" data-value="minimal" aria-pressed="false">Minimal</button>
+            <button type="button" data-value="bubble" aria-pressed="false">Bubble</button>
+            <button type="button" data-value="glass" aria-pressed="false">Glass</button>
+            <button type="button" data-value="bold" aria-pressed="false">Bold</button>
+            <button type="button" data-value="elegant" aria-pressed="false">Elegant</button>
           </div>
         </div>
         <div class="stage light" id="stage"></div>
@@ -167,7 +186,8 @@
       <div class="shots">
         <figure><img src="img/inbox.png" alt="The inbox with pending testimonials and approve buttons" loading="lazy"><figcaption>Review new testimonials</figcaption></figure>
         <figure><img src="img/collect.png" alt="The public form with a star rating and a text box" loading="lazy"><figcaption>The form your customers fill in</figcaption></figure>
-        <figure><img src="img/embed.png" alt="The embed page with layout options, the code and a live preview" loading="lazy"><figcaption>Pick a layout, copy the code</figcaption></figure>
+        <figure><img src="img/embed.png" alt="The widget designer with layout and style options, the code and a live preview" loading="lazy"><figcaption>Design the widget, copy the code</figcaption></figure>
+        <figure><img src="img/share.png" alt="A testimonial turned into a square social media image on a purple gradient" loading="lazy"><figcaption>Share testimonials as images</figcaption></figure>
       </div>
     </section>
 
@@ -175,7 +195,11 @@
       <h2>Everything you need, nothing you don't</h2>
       <p class="sub">&nbsp;</p>
       <div class="features">
+        <div class="feature"><b>Widget designer</b><span>Pick a layout, a style, colors, corners and what to show. The code updates as you click.</span></div>
+        <div class="feature"><b>Share as image</b><span>Turn any testimonial into a post for LinkedIn, Instagram or X. Six templates, three sizes.</span></div>
+        <div class="feature"><b>Five languages</b><span>The form, the wall and the widget in English, Turkish, German, Spanish or French.</span></div>
         <div class="feature"><b>Moderation inbox</b><span>Pending, approved and rejected tabs. Nothing goes public until you approve it.</span></div>
+        <div class="feature"><b>Email alerts</b><span>Get an email when someone leaves a testimonial. Export everything to CSV.</span></div>
         <div class="feature"><b>Pin favourites</b><span>Featured testimonials go first and get a subtle highlight.</span></div>
         <div class="feature"><b>Ratings and photos</b><span>Optional star ratings and avatars, with initials as a fallback.</span></div>
         <div class="feature"><b>Spam protection</b><span>Rate limiting, a honeypot field and required consent.</span></div>
@@ -198,6 +222,7 @@
             <tr><td>Remove the branding</td><td class="yes">✓</td><td>Paid plans</td></tr>
             <tr><td>Unlimited walls and testimonials</td><td class="yes">✓</td><td>Depends on plan</td></tr>
             <tr><td>Open source, change anything</td><td class="yes">✓</td><td class="no">—</td></tr>
+            <tr><td>Social images, CSV export, 5 languages</td><td class="yes">✓</td><td>Depends on plan</td></tr>
             <tr><td>Video testimonials</td><td class="no">Not yet</td><td class="yes">✓</td></tr>
           </tbody>
         </table>
@@ -223,16 +248,19 @@ docker compose up -d</pre>
   <script src="widget.js"></script>
   <script>
     (function () {
-      var state = { layout: 'masonry', theme: 'light' };
+      var state = { layout: 'masonry', theme: 'light', style: 'classic' };
       var stage = document.getElementById('stage');
       var feedPromise = fetch('demo-feed.json').then(function (response) { return response.json(); });
 
       function draw() {
-        stage.className = 'stage ' + state.theme;
+        stage.className = 'stage ' + state.theme + (state.layout === 'badge' ? ' center' : '');
         var target = document.createElement('div');
         target.dataset.layout = state.layout;
-        target.dataset.theme = state.theme;
+        target.dataset.style = state.style;
+        target.dataset.theme = state.theme === 'dark' ? 'dark' : 'light';
+        target.dataset.limit = state.layout === 'masonry' || state.layout === 'grid' ? '6' : '';
         target.dataset.branding = 'false';
+        try { sessionStorage.clear(); } catch (e) {}
         stage.replaceChildren(target);
         feedPromise.then(function (feed) { window.Praisewall.mount(target, feed); });
       }

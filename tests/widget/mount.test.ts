@@ -43,7 +43,8 @@ describe('mount', () => {
     await mount(target);
 
     expect(fetchMock).toHaveBeenCalledWith('https://example.com/api/walls/orbit', expect.anything());
-    expect(target.getAttribute('data-theme')).toBe('dark');
+    expect(target.getAttribute('data-pw-theme')).toBe('dark');
+    expect(target.getAttribute('data-pw-style')).toBe('classic');
     expect(target.shadowRoot!.querySelectorAll('.card')).toHaveLength(1);
     expect(target.shadowRoot!.querySelector('style')).not.toBeNull();
   });
@@ -57,6 +58,17 @@ describe('mount', () => {
 
     expect(fetchMock).not.toHaveBeenCalled();
     expect(target.shadowRoot!.querySelectorAll('.card')).toHaveLength(1);
+  });
+
+  it("uses the wall's style unless the embed picks one", async () => {
+    const own = element('');
+    await mount(own, { ...feed, style: 'elegant' });
+    expect(own.getAttribute('data-pw-style')).toBe('elegant');
+
+    const picked = element('');
+    picked.dataset.style = 'bold';
+    await mount(picked, { ...feed, style: 'elegant' });
+    expect(picked.getAttribute('data-pw-style')).toBe('bold');
   });
 
   it('renders nothing when the feed fails to load', async () => {

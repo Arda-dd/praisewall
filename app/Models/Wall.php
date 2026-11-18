@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 #[Fillable([
     'slug', 'name', 'headline', 'prompt', 'accent_color', 'logo_path',
     'thank_you_message', 'collecting', 'ask_for_rating', 'ask_for_avatar',
+    'style', 'locale', 'notify',
 ])]
 class Wall extends Model
 {
@@ -25,6 +26,7 @@ class Wall extends Model
             'collecting' => 'boolean',
             'ask_for_rating' => 'boolean',
             'ask_for_avatar' => 'boolean',
+            'notify' => 'boolean',
         ];
     }
 
@@ -82,13 +84,39 @@ class Wall extends Model
      */
     public function toPublicArray(): array
     {
+        $testimonials = $this->published;
+        $ratings = $testimonials->pluck('rating')->filter();
+
         return [
             'name' => $this->name,
             'accent_color' => $this->accent_color,
+            'style' => $this->style,
+            'locale' => $this->locale,
             'logo_url' => $this->logoUrl(),
             'wall_url' => $this->wallUrl(),
             'collect_url' => $this->collecting ? $this->collectUrl() : null,
-            'testimonials' => $this->published->map->toPublicArray()->values()->all(),
+            'summary' => [
+                'count' => $testimonials->count(),
+                'rated' => $ratings->count(),
+                'average' => $ratings->isEmpty() ? null : round($ratings->avg(), 1),
+            ],
+            'labels' => $this->widgetLabels(),
+            'testimonials' => $testimonials->map->toPublicArray()->values()->all(),
         ];
+    }
+
+    /**
+     * The widget's texts in the wall's language. Placeholders like :count are filled in by the widget,
+     * and "reviews" is sent as [singular, plural].
+     *
+     * @return array<string, string|array<int, string>>
+     */
+    public function widgetLabels(): array
+    {
+        $labels = trans('praisewall.widget', [], $this->locale);
+        $labels['reviews'] = explode('|', $labels['reviews'], 2) + [1 => $labels['reviews']];
+        $labels['about'] = str_replace(':name', $this->name, $labels['about']);
+
+        return $labels;
     }
 }

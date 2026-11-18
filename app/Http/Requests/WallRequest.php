@@ -18,6 +18,7 @@ class WallRequest extends FormRequest
             'collecting' => $this->boolean('collecting'),
             'ask_for_rating' => $this->boolean('ask_for_rating'),
             'ask_for_avatar' => $this->boolean('ask_for_avatar'),
+            'notify' => $this->boolean('notify'),
         ]);
     }
 
@@ -41,6 +42,9 @@ class WallRequest extends FormRequest
             'collecting' => ['boolean'],
             'ask_for_rating' => ['boolean'],
             'ask_for_avatar' => ['boolean'],
+            'notify' => ['boolean'],
+            'style' => ['required', Rule::in(array_keys(config('praisewall.styles')))],
+            'locale' => ['required', Rule::in(array_keys(config('praisewall.locales')))],
         ];
     }
 }

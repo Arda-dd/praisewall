@@ -9,6 +9,13 @@ services:
       APP_URL: ${APP_URL:-http://localhost:8080}
       # Generate one with: echo "base64:$(openssl rand -base64 32)"
       APP_KEY: ${APP_KEY:?Set APP_KEY in a .env file next to this one}
+      # Optional: email alerts about new testimonials.
+      MAIL_MAILER: ${MAIL_MAILER:-log}
+      MAIL_HOST: ${MAIL_HOST:-}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS:-praisewall@example.com}
     volumes:
       - praisewall-storage:/var/www/html/storage
 

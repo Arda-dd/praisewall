@@ -47,11 +47,39 @@
             </x-field>
         </div>
 
+        <div class="panel space-y-5 p-6">
+            <fieldset>
+                <legend class="label">Style</legend>
+                <p class="hint -mt-1 mb-3">Used on the public wall and as the default for widgets. You can pick another one per embed.</p>
+                <div class="grid grid-cols-2 gap-2">
+                    @foreach (config('praisewall.styles') as $value => $label)
+                        <label class="cursor-pointer">
+                            <input type="radio" name="style" value="{{ $value }}" class="peer sr-only" @checked(old('style', $wall->style) === $value)>
+                            <span class="flex items-center gap-2.5 rounded-xl border border-zinc-200 p-2.5 text-sm font-medium peer-checked:border-brand-700 peer-checked:bg-brand-50 peer-checked:text-brand-700 peer-focus-visible:outline-2 peer-focus-visible:outline-brand-600 dark:border-zinc-700 dark:peer-checked:bg-brand-700/20 dark:peer-checked:text-brand-100">
+                                <x-style-swatch :style="$value" :accent="old('accent_color', $wall->accent_color)" />
+                                {{ $label }}
+                            </span>
+                        </label>
+                    @endforeach
+                </div>
+                @error('style') <p class="error">{{ $message }}</p> @enderror
+            </fieldset>
+
+            <x-field name="locale" label="Language" hint="For the form your customers see, the public wall and the widget's buttons.">
+                <select id="locale" name="locale" class="input">
+                    @foreach (config('praisewall.locales') as $code => $language)
+                        <option value="{{ $code }}" @selected(old('locale', $wall->locale) === $code)>{{ $language }}</option>
+                    @endforeach
+                </select>
+            </x-field>
+        </div>
+
         <div class="panel space-y-4 p-6">
             @foreach ([
                 'collecting' => ['Accept new testimonials', 'Turn off to close the form.'],
                 'ask_for_rating' => ['Ask for a star rating', 'Required when turned on.'],
                 'ask_for_avatar' => ['Let people add a photo', 'Optional for them.'],
+                'notify' => ['Email me about new ones', 'Uses the mail settings in your .env file.'],
             ] as $field => [$label, $hint])
                 <label class="flex items-start gap-3">
                     <input type="hidden" name="{{ $field }}" value="0">

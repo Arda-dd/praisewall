@@ -117,7 +117,7 @@ class CollectTest extends TestCase
     {
         $wall = Wall::factory()->create(['collecting' => false]);
 
-        $this->get("/c/{$wall->slug}")->assertOk()->assertSee("isn't collecting testimonials right now", false);
+        $this->get("/c/{$wall->slug}")->assertOk()->assertSee("isn't collecting testimonials right now");
         $this->post("/c/{$wall->slug}", $this->submission())->assertNotFound();
         $this->assertDatabaseCount('testimonials', 0);
     }

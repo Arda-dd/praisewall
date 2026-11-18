@@ -20,6 +20,9 @@ return new class extends Migration
             $table->boolean('collecting')->default(true);
             $table->boolean('ask_for_rating')->default(true);
             $table->boolean('ask_for_avatar')->default(true);
+            $table->string('style')->default('classic');
+            $table->string('locale', 5)->default('en');
+            $table->boolean('notify')->default(true);
             $table->timestamps();
         });
     }

@@ -1,12 +1,34 @@
 {
   "name": "Orbit",
   "accent_color": "#6d28d9",
+  "style": "classic",
+  "locale": "en",
   "logo_url": null,
   "wall_url": null,
   "collect_url": null,
+  "summary": {
+    "count": 9,
+    "rated": 9,
+    "average": 4.8
+  },
+  "labels": {
+    "read_more": "Read more",
+    "show_less": "Show less",
+    "leave": "Leave a testimonial",
+    "empty": "No testimonials yet.",
+    "stars": ":rating out of 5 stars",
+    "reviews": [
+      ":count review",
+      ":count reviews"
+    ],
+    "previous": "Previous",
+    "next": "Next",
+    "close": "Close",
+    "about": "What people say about Orbit"
+  },
   "testimonials": [
     {
-      "id": 41,
+      "id": 18,
       "body": "We moved our whole roadmap into Orbit in an afternoon. Two months later, standups take ten minutes instead of thirty, because everyone can already see what's blocked.",
       "rating": 5,
       "featured": true,
@@ -20,7 +42,7 @@
       "date": null
     },
     {
-      "id": 43,
+      "id": 20,
       "body": "The timeline view sold it for us. We used to rebuild the same Gantt chart in slides every Friday for leadership. Now I send them a link and get my Friday afternoons back.\n\nSupport answered a question within an hour, on a Sunday.",
       "rating": 5,
       "featured": true,
@@ -34,7 +56,7 @@
       "date": null
     },
     {
-      "id": 42,
+      "id": 19,
       "body": "Finally a project tool my designers actually open without being asked.",
       "rating": 5,
       "featured": false,
@@ -48,7 +70,7 @@
       "date": null
     },
     {
-      "id": 44,
+      "id": 21,
       "body": "Fast, keyboard friendly and it stays out of the way. I would love a few more integrations, but the GitHub sync alone was worth switching for.",
       "rating": 4,
       "featured": false,
@@ -62,7 +84,7 @@
       "date": null
     },
     {
-      "id": 45,
+      "id": 22,
       "body": "I manage 14 freelancers across 5 time zones. Orbit is the first tool where I don't have to chase people for status updates.",
       "rating": 5,
       "featured": false,
@@ -76,7 +98,7 @@
       "date": null
     },
     {
-      "id": 46,
+      "id": 23,
       "body": "We onboard every new client into a shared Orbit space now. Clients love seeing progress without having to email us.",
       "rating": 5,
       "featured": false,
@@ -90,7 +112,7 @@
       "date": null
     },
     {
-      "id": 47,
+      "id": 24,
       "body": "Clean, calm and quick. Our team adopted it in a week.",
       "rating": 5,
       "featured": false,
@@ -104,7 +126,7 @@
       "date": null
     },
     {
-      "id": 48,
+      "id": 25,
       "body": "The API is well documented and the webhooks are reliable. Built our release dashboard on top of it in a day.",
       "rating": 4,
       "featured": false,
@@ -118,7 +140,7 @@
       "date": null
     },
     {
-      "id": 49,
+      "id": 26,
       "body": "It's rare that a B2B tool feels this considered. Every small interaction has been thought through.",
       "rating": 5,
       "featured": false,

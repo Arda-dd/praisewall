@@ -59,6 +59,7 @@
             </form>
         @endif
         <a href="{{ route('testimonials.edit', $testimonial) }}" class="btn-ghost">Edit</a>
+        <a href="{{ route('testimonials.image', $testimonial) }}" class="btn-ghost">Share as image</a>
         <form method="POST" action="{{ route('testimonials.destroy', $testimonial) }}" class="ml-auto" data-confirm="Delete this testimonial for good?">
             @csrf @method('DELETE')
             <button class="btn-danger">Delete</button>

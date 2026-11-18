@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SetupController;
 use App\Http\Controllers\CollectController;
 use App\Http\Controllers\EmbedController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PublicWallController;
+use App\Http\Controllers\ShareImageController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\WallFeedController;
@@ -25,9 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::redirect('/', '/walls');
     Route::resource('walls', WallController::class);
     Route::get('walls/{wall}/embed', EmbedController::class)->name('walls.embed');
+    Route::get('walls/{wall}/export', ExportController::class)->name('walls.export');
 
     Route::post('walls/{wall}/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
     Route::get('testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::get('testimonials/{testimonial}/image', ShareImageController::class)->name('testimonials.image');
     Route::put('testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
     Route::patch('testimonials/{testimonial}/status', [TestimonialController::class, 'status'])->name('testimonials.status');
     Route::patch('testimonials/{testimonial}/feature', [TestimonialController::class, 'feature'])->name('testimonials.feature');
