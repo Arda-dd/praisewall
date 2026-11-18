@@ -176,7 +176,7 @@ With Docker, put them in the same `.env` file as `APP_KEY` and run `docker compo
 
 Praisewall is a standard Laravel app, so it runs on most PHP hosting, including shared hosting with cPanel.
 
-**Requirements:** PHP 8.3 or newer with the `pdo_sqlite` (or `pdo_mysql`) and `fileinfo` extensions, [Composer](https://getcomposer.org/), and [Node.js](https://nodejs.org/) 22 or newer to build the assets.
+**Requirements:** PHP 8.4 or newer with the `pdo_sqlite` (or `pdo_mysql`) and `fileinfo` extensions, [Composer](https://getcomposer.org/), and [Node.js](https://nodejs.org/) 22 or newer to build the assets.
 
 ```bash
 git clone https://github.com/Arda-dd/praisewall.git
