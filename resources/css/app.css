@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-brand-50: #f5f3ff;
+    --color-brand-100: #ede9fe;
+    --color-brand-500: #8b5cf6;
+    --color-brand-600: #7c3aed;
+    --color-brand-700: #6d28d9;
+}
+
+@utility btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:opacity-50;
+}
+
+@utility btn-primary {
+    @apply btn bg-brand-700 text-white shadow-sm hover:bg-brand-600;
+}
+
+@utility btn-secondary {
+    @apply btn border border-zinc-200 bg-white text-zinc-800 shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800;
+}
+
+@utility btn-ghost {
+    @apply btn px-2.5 py-1.5 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100;
+}
+
+@utility btn-danger {
+    @apply btn px-2.5 py-1.5 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950;
+}
+
+@utility label {
+    @apply mb-1.5 block text-sm font-medium text-zinc-800 dark:text-zinc-200;
+}
+
+@utility hint {
+    @apply mt-1.5 text-sm text-zinc-500 dark:text-zinc-400;
+}
+
+@utility input {
+    @apply block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm placeholder:text-zinc-400 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100;
+}
+
+@utility panel {
+    @apply rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900;
+}
+
+@utility error {
+    @apply mt-1.5 text-sm font-medium text-red-600 dark:text-red-400;
+}
+
+@utility code {
+    @apply block overflow-x-auto rounded-xl bg-zinc-950 p-4 font-mono text-[13px] leading-relaxed text-zinc-100;
+}

@@ -1,0 +1,135 @@
+{
+  "name": "Orbit",
+  "accent_color": "#6d28d9",
+  "logo_url": null,
+  "wall_url": null,
+  "collect_url": null,
+  "testimonials": [
+    {
+      "id": 41,
+      "body": "We moved our whole roadmap into Orbit in an afternoon. Two months later, standups take ten minutes instead of thirty, because everyone can already see what's blocked.",
+      "rating": 5,
+      "featured": true,
+      "author": {
+        "name": "Maya Kaya",
+        "title": "CTO at Fernway",
+        "url": null,
+        "avatar_url": null,
+        "initials": "MK"
+      },
+      "date": null
+    },
+    {
+      "id": 43,
+      "body": "The timeline view sold it for us. We used to rebuild the same Gantt chart in slides every Friday for leadership. Now I send them a link and get my Friday afternoons back.\n\nSupport answered a question within an hour, on a Sunday.",
+      "rating": 5,
+      "featured": true,
+      "author": {
+        "name": "Lena Fischer",
+        "title": "Head of Product at Norrin",
+        "url": null,
+        "avatar_url": null,
+        "initials": "LF"
+      },
+      "date": null
+    },
+    {
+      "id": 42,
+      "body": "Finally a project tool my designers actually open without being asked.",
+      "rating": 5,
+      "featured": false,
+      "author": {
+        "name": "Daniel Osei",
+        "title": "Founder, Brightloop",
+        "url": null,
+        "avatar_url": null,
+        "initials": "DO"
+      },
+      "date": null
+    },
+    {
+      "id": 44,
+      "body": "Fast, keyboard friendly and it stays out of the way. I would love a few more integrations, but the GitHub sync alone was worth switching for.",
+      "rating": 4,
+      "featured": false,
+      "author": {
+        "name": "Kenji Watanabe",
+        "title": "Engineering Manager, Tessel",
+        "url": null,
+        "avatar_url": null,
+        "initials": "KW"
+      },
+      "date": null
+    },
+    {
+      "id": 45,
+      "body": "I manage 14 freelancers across 5 time zones. Orbit is the first tool where I don't have to chase people for status updates.",
+      "rating": 5,
+      "featured": false,
+      "author": {
+        "name": "Aisha Rahman",
+        "title": "Operations Lead at Kindle & Co",
+        "url": null,
+        "avatar_url": null,
+        "initials": "AR"
+      },
+      "date": null
+    },
+    {
+      "id": 46,
+      "body": "We onboard every new client into a shared Orbit space now. Clients love seeing progress without having to email us.",
+      "rating": 5,
+      "featured": false,
+      "author": {
+        "name": "Tomás Rivera",
+        "title": "Agency owner",
+        "url": null,
+        "avatar_url": null,
+        "initials": "TR"
+      },
+      "date": null
+    },
+    {
+      "id": 47,
+      "body": "Clean, calm and quick. Our team adopted it in a week.",
+      "rating": 5,
+      "featured": false,
+      "author": {
+        "name": "Sophie Laurent",
+        "title": "COO, Maison Digitale",
+        "url": null,
+        "avatar_url": null,
+        "initials": "SL"
+      },
+      "date": null
+    },
+    {
+      "id": 48,
+      "body": "The API is well documented and the webhooks are reliable. Built our release dashboard on top of it in a day.",
+      "rating": 4,
+      "featured": false,
+      "author": {
+        "name": "Ravi Menon",
+        "title": "Senior Developer at Quanta",
+        "url": null,
+        "avatar_url": null,
+        "initials": "RM"
+      },
+      "date": null
+    },
+    {
+      "id": 49,
+      "body": "It's rare that a B2B tool feels this considered. Every small interaction has been thought through.",
+      "rating": 5,
+      "featured": false,
+      "author": {
+        "name": "Elif Demir",
+        "title": "Product Designer",
+        "url": null,
+        "avatar_url": null,
+        "initials": "ED"
+      },
+      "date": null
+    }
+  ]
+}
